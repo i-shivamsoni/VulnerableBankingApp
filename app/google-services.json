@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "339425507441",
+    "firebase_url": "https://vulnerable-banking-app.firebaseio.com",
+    "project_id": "vulnerable-banking-app",
+    "storage_bucket": "vulnerable-banking-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339425507441:android:d1eaca0342db3e7d2903d0",
+        "android_client_info": {
+          "package_name": "com.example.vulnerablebankingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339425507441-rrsvkgn152q6s07j5jhd0tdpkdphs9gi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaQd2k0FaQa9vMYyHQZMjN7QePxikI0Zg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339425507441-rrsvkgn152q6s07j5jhd0tdpkdphs9gi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
