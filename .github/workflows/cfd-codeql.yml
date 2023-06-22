@@ -12,21 +12,23 @@
 name: "CodeQL"
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
-  schedule:
-    - cron: '33 4 * * 6'
+   workflow_run:
+     workflows: ["Java CI with Gradle"]
+     types: [completed] #requested
 
 permissions:
   contents: read
 
 jobs:
+  on-failure:
+     runs-on: ubuntu-latest
+     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+     steps:
+       - run: echo "Java CI with Gradle build failed workflow will be aborted"
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       actions: read
       contents: read
@@ -45,6 +47,7 @@ jobs:
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
+      if: ${{ github.event.workflow_run.conclusion == 'success' }}
       uses: github/codeql-action/init@18fe527fa8b29f134bb91f32f1a5dc5abb15ed7f
       with:
         languages: ${{ matrix.language }}
@@ -59,6 +62,7 @@ jobs:
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: Autobuild
+      if: ${{ github.event.workflow_run.conclusion == 'success' }}
       uses: github/codeql-action/autobuild@18fe527fa8b29f134bb91f32f1a5dc5abb15ed7f
 
     # ℹ️ Command-line programs to run using the OS shell.
@@ -72,4 +76,5 @@ jobs:
     #   ./location_of_script_within_repo/buildscript.sh
 
     - name: Perform CodeQL Analysis
+      if: ${{ github.event.workflow_run.conclusion == 'success' }}
       uses: github/codeql-action/analyze@18fe527fa8b29f134bb91f32f1a5dc5abb15ed7f
