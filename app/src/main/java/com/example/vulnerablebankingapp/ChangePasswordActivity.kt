@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_change_password.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.text_field_password
 
-class ChangePasswordActivity : AppCompatActivity() {
+class ChangePasswordActivity : AppCompatActivity() 
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
