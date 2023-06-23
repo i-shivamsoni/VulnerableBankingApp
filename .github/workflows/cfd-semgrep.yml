@@ -12,19 +12,22 @@
 name: Semgrep
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
-  schedule:
-    - cron: '36 15 * * 2'
+   workflow_run:
+     workflows: ["Java CI with Gradle"]
+     types: [completed] #requested
 
 permissions:
   contents: read
 
 jobs:
+  on-failure:
+     runs-on: ubuntu-latest
+     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+     steps:
+       - run: echo "Java CI with Gradle build failed workflow will be aborted"
+       
   semgrep:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
