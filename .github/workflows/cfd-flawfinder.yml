@@ -6,22 +6,25 @@
 name: flawfinder
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
-  schedule:
-    - cron: '27 23 * * 1'
+   workflow_run:
+     workflows: ["Java CI with Gradle"]
+     types: [completed] #requested
 
 permissions:
   contents: read
 
 
 jobs:
+  on-failure:
+     runs-on: ubuntu-latest
+     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+     steps:
+       - run: echo "Java CI with Gradle build failed workflow will be aborted"
+       
   flawfinder:
     name: Flawfinder
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       actions: read
       contents: read
