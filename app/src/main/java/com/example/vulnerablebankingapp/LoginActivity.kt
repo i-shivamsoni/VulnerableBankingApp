@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_transaction.*
 
-class LoginActivity : AppCompatActivity(){
+class LoginActivity : AppCompatActivity(){{
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
